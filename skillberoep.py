@@ -107,22 +107,25 @@ def bereken_top_beroepen_op_basis_van_skills(geselecteerde_skills, aantal_top):
     return top_beroepen_skills_df
 
 
+if 'ingelogd' not in st.session_state:
+    st.session_state['ingelogd'] = False
+
 st.title("Inloggen")
 
-ingelogd = False
+# Alleen het inlogformulier tonen als de gebruiker niet is ingelogd
+if not st.session_state['ingelogd']:
+    inlognaam = st.text_input("Gebruikersnaam")
+    inlogcode = st.text_input("Wachtwoord", type="password")
 
-inlognaam = st.text_input("Gebruikersnaam")
-inlogcode = st.text_input("Wachtwoord", type="password")
+    if st.button("Inloggen"):
+        if inlognaam == "stan" and inlogcode == "partners2024":
+            st.session_state['ingelogd'] = True
+            st.success("Succesvol ingelogd!")
+        else:
+            st.error("Onjuiste gebruikersnaam of wachtwoord")
 
-if st.button("Inloggen"):
-    if inlognaam == "stan" and inlogcode == "partners2024":
-        ingelogd = True
-        st.success("Succesvol ingelogd!")
-    else:
-        st.error("Onjuiste gebruikersnaam of wachtwoord")
-
-# Toon de rest van de app als de gebruiker succesvol is ingelogd
-if ingelogd:
+# De rest van de app tonen als de gebruiker is ingelogd
+if st.session_state['ingelogd']:
 # Streamlit interface
     st.subheader('Beroepen en Skills Analyse')
 
