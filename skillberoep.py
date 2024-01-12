@@ -2,16 +2,16 @@ import pandas as pd
 import streamlit as st
 from streamlit_searchbox import st_searchbox
 
-beroepen = pd.read_csv("C:/Users/BasVisser/OneDrive - Stan Partnerships BV/Documenten/Esco/ESCO dataset - v1.1.1 - classification - nl - csv/occupations_nl.csv")
+beroepen = pd.read_csv("occupations_nl.csv")
 beroepen['altLabels'] = beroepen['altLabels'].str.replace('\n', ', ')
 ##beroepen['conceptUri'][1]
 #beroepen[['conceptUri','preferredLabel','altLabels']]
 ##beroepen
 
-skillberoepen = pd.read_csv("C:/Users/BasVisser/OneDrive - Stan Partnerships BV/Documenten/Esco/ESCO dataset - v1.1.1 - classification - nl - csv/occupationSkillRelations_nl.csv")
+skillberoepen = pd.read_csv("occupationSkillRelations_nl.csv")
 #skillberoepen[['occupationUri',	'relationType',	'skillType','skillUri']]
 
-skill = pd.read_csv("C:/Users/BasVisser/OneDrive - Stan Partnerships BV/Documenten/Esco/ESCO dataset - v1.1.1 - classification - nl - csv/skills_nl.csv")
+skill = pd.read_csv("skills_nl.csv")
 #skill[['conceptUri','preferredLabel']]
 
 Skillberoep_U_df = pd.merge(skillberoepen, beroepen, how='left', left_on='occupationUri', right_on='conceptUri')
